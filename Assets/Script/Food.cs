@@ -13,11 +13,13 @@ public class Food : MonoBehaviour
 
             GameManager.instance.SpawnFood();
 
-            Snake snake = other.GetComponent<Snake>();
-            if (snake != null)
+            SnakeBody snakeBody = other.GetComponentInParent<SnakeBody>();
+            if (snakeBody != null)
             {
-                //snake.Grow(); // Call a method to grow the snake
+                snakeBody.AddBodyPart();
             }
+
+            
         }
     }
 

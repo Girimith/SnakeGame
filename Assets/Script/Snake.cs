@@ -2,27 +2,35 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
-    public float moveInterval = 0.5f;
-    private Vector3 direction = Vector3.right;
-    private float moveTimer;
+    public static Snake instance;
+    public float moveSpeed = 1f;   // Speed of the snake
+    public float turnSpeed = 200f; // Turning speed
+    public FixedJoystick joystick; // Reference to the fixed joystick
+
+    private Vector3 movement;      // Stores movement direction
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Update()
     {
-        moveTimer += Time.deltaTime;
-        if (moveTimer >= moveInterval)
+        // Get joystick input
+        float horizontal = joystick.Horizontal;
+        float vertical = joystick.Vertical;
+
+        // Determine direction based on joystick input
+        movement = new Vector3(horizontal, 0f, vertical).normalized;
+
+        // Rotate snake head if there's movement
+        if (movement != Vector3.zero)
         {
-            Move();
-            moveTimer = 0f;
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.W)) direction = Vector3.forward;
-        if (Input.GetKeyDown(KeyCode.S)) direction = Vector3.back;
-        if (Input.GetKeyDown(KeyCode.A)) direction = Vector3.left;
-        if (Input.GetKeyDown(KeyCode.D)) direction = Vector3.right;
-    }
-
-    void Move()
-    {
-        transform.position += direction;
+        // Move the snake forward
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 }
