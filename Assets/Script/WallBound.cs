@@ -12,7 +12,9 @@ public class WallBound : MonoBehaviour
 
             UiManager.instance.losePanel.SetActive(true);
             UiManager.instance.gamepanel.SetActive(false);
-            UiManager.instance.gameObject.GetComponent<Canvas>().planeDistance = 1;
+            UiManager.instance.Bg.gameObject.SetActive(true);
+
+            //UiManager.instance.gameObject.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
 
         }
     }

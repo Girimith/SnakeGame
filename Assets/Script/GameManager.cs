@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour
         {
             //Debug.Log("Game Over! All tiles are healthy!");
             UiManager.instance.winpanel.SetActive(true);
-            UiManager.instance.gameObject.GetComponent<Canvas>().planeDistance = 1;
+            //UiManager.instance.gameObject.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+            UiManager.instance.Bg.gameObject.SetActive(true);
+
             UiManager.instance.gamepanel.SetActive(false);
 
 

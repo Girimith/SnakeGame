@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
-    [SerializeField] private RawImage Bg;
+    public RawImage Bg;
 
     [SerializeField] private TextMeshProUGUI gameTimerText;
     [HideInInspector] public bool gameStart = false;
+    private bool isPaused = false;
 
     public GameObject menuPanel;
     public GameObject gamepanel;
@@ -39,7 +40,9 @@ public class UiManager : MonoBehaviour
         menuPanel.SetActive(false);
         gamepanel.SetActive(true);
 
-        gameObject.GetComponent<Canvas>().planeDistance = 100;
+        Bg.gameObject.SetActive(false);
+
+        //gameObject.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
 
         if (score > highscore)
         {
@@ -58,19 +61,21 @@ public class UiManager : MonoBehaviour
         //running timer on game screen
         if (gameStart)
         {
-            if (remainingTime > 0)
+            if (!isPaused && remainingTime > 0)
             {
 
                 remainingTime -= Time.deltaTime;
-            }
-            else if (remainingTime < 0)
-            {
-                remainingTime = 0;
 
-                losePanel.SetActive(true);
-                gameObject.GetComponent<Canvas>().planeDistance = 1;
-                gamepanel.SetActive(false);
+                if (remainingTime <= 0)
+                {
+                    remainingTime = 0;
+
+                    losePanel.SetActive(true);
+                    gameObject.GetComponent<Canvas>().planeDistance = 1;
+                    gamepanel.SetActive(false);
+                }
             }
+            
             int minutes = Mathf.FloorToInt(remainingTime / 60);
             int seconds = Mathf.FloorToInt(remainingTime % 60);
             gameTimerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
@@ -83,8 +88,11 @@ public class UiManager : MonoBehaviour
     public void Pause()
     {
         Snake.instance.moveSpeed = 0;
+        isPaused = true;
         pausePanel.SetActive(true);
-        gameObject.GetComponent<Canvas>().planeDistance = 1;
+        gamepanel.SetActive(false);
+        Bg.gameObject.SetActive(true);
+        //gameObject.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
 
     }
 
@@ -96,8 +104,11 @@ public class UiManager : MonoBehaviour
     public void Resume()
     {
         Invoke("SnakeDelay", 3f);
+        isPaused = false;
         pausePanel.SetActive(false);
-        gameObject.GetComponent<Canvas>().planeDistance = 100;
+        gamepanel.SetActive(true);
+        Bg.gameObject.SetActive(false);
+        //gameObject.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
 
     }
 

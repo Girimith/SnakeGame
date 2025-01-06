@@ -41,6 +41,6 @@ public class Snake : MonoBehaviour
     void Update()
     {
 
-        Invoke("AddDelay", 3f);
+        Invoke("AddDelay", 4f);
     }
 }
