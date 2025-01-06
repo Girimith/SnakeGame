@@ -8,8 +8,11 @@ public class WallBound : MonoBehaviour
     {
         if (other.CompareTag("Snake"))
         {
-            //Debug.Log("dedxe");
             Snake.instance.moveSpeed = 0;
+
+            UiManager.instance.losePanel.SetActive(true);
+            UiManager.instance.gamepanel.SetActive(false);
+            UiManager.instance.gameObject.GetComponent<Canvas>().planeDistance = 1;
 
         }
     }

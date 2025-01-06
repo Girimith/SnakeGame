@@ -28,9 +28,16 @@ public class GameManager : MonoBehaviour
     {
         if (AllTilesHealthy())
         {
-            Debug.Log("Game Over! All tiles are healthy!");
+            //Debug.Log("Game Over! All tiles are healthy!");
             UiManager.instance.winpanel.SetActive(true);
-            // Implement game over UI or logic here
+            UiManager.instance.gameObject.GetComponent<Canvas>().planeDistance = 1;
+            UiManager.instance.gamepanel.SetActive(false);
+
+
+            UiManager.instance.finalscoreText.text = UiManager.instance.score.ToString();
+
+            PlayerPrefs.SetInt("HighScore", UiManager.instance.score);
+
         }
     }
 

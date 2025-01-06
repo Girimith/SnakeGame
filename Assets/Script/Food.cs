@@ -13,6 +13,9 @@ public class Food : MonoBehaviour
 
             GameManager.instance.SpawnFood();
 
+            UiManager.instance.score += 10;
+            UiManager.instance.scoreText.text = UiManager.instance.score.ToString();
+
             SnakeBody snakeBody = other.GetComponentInParent<SnakeBody>();
             if (snakeBody != null)
             {
