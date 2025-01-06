@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
             UiManager.instance.gamepanel.SetActive(false);
 
+            Snake.instance.moveSpeed = 0;
 
             UiManager.instance.finalscoreText.text = UiManager.instance.score.ToString();
 
