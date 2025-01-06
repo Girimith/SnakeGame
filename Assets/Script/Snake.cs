@@ -16,21 +16,25 @@ public class Snake : MonoBehaviour
 
     void Update()
     {
-        // Get joystick input
-        float horizontal = joystick.Horizontal;
-        float vertical = joystick.Vertical;
-
-        // Determine direction based on joystick input
-        movement = new Vector3(horizontal, 0f, vertical).normalized;
-
-        // Rotate snake head if there's movement
-        if (movement != Vector3.zero)
+        if(UiManager.instance.gameStart)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(movement);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-        }
+            // Get joystick input
+            float horizontal = joystick.Horizontal;
+            float vertical = joystick.Vertical;
 
-        // Move the snake forward
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            // Determine direction based on joystick input
+            movement = new Vector3(horizontal, 0f, vertical).normalized;
+
+            // Rotate snake head if there's movement
+            if (movement != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(movement);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+            }
+
+            // Move the snake forward
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        }
+        
     }
 }
