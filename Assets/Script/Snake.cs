@@ -14,9 +14,10 @@ public class Snake : MonoBehaviour
         instance = this;
     }
 
-    void Update()
+
+    private void AddDelay()
     {
-        if(UiManager.instance.gameStart)
+        if (UiManager.instance.gameStart)
         {
             // Get joystick input
             float horizontal = joystick.Horizontal;
@@ -35,6 +36,11 @@ public class Snake : MonoBehaviour
             // Move the snake forward
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
         }
-        
+    }
+
+    void Update()
+    {
+
+        Invoke("AddDelay", 3f);
     }
 }

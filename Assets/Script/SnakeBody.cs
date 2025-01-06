@@ -27,7 +27,7 @@ public class SnakeBody : MonoBehaviour
         // Move each body part to follow the previous segment's position
         for (int i = 0; i < bodyParts.Count; i++)
         {
-            Vector3 targetPosition = positions[Mathf.Max(0, positions.Count - 1 - (i + 1))];
+            Vector3 targetPosition = positions[Mathf.Max(0, positions.Count - 1 - (i ))];
             bodyParts[i].position = Vector3.Lerp(bodyParts[i].position, targetPosition, Time.deltaTime * 10f);
         }
 

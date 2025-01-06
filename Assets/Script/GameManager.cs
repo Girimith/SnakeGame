@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] foodPrefab;
     public Vector2Int gridSize;
 
+    
+
     private void Awake()
     {
         instance = this;
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
         if (AllTilesHealthy())
         {
             Debug.Log("Game Over! All tiles are healthy!");
+            UiManager.instance.winpanel.SetActive(true);
             // Implement game over UI or logic here
         }
     }

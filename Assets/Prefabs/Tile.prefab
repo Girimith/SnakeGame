@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3723885428366047560}
   - component: {fileID: 3723885428366047561}
   - component: {fileID: 3723885428366047562}
-  - component: {fileID: 3723885428366047563}
   - component: {fileID: 1974030634892336255}
+  - component: {fileID: 6534306886919024334}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3723885428366047563
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3723885428366047556}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1974030634892336255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,3 +99,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthyMaterial: {fileID: 2100000, guid: fc038b17486ec431c9ab51391fbdee0e, type: 2}
   isHealthy: 0
+--- !u!65 &6534306886919024334
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3723885428366047556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 2.220446e-16, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}

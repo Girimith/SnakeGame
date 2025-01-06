@@ -5,17 +5,19 @@ using TMPro;
 public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
-    [SerializeField] private RawImage _img;  //Bg Raw Image
-    [SerializeField] private float _x, _y;
-
-    [SerializeField] private GameObject menupanel;
-    [SerializeField] private GameObject winPanel;
-    [SerializeField] public GameObject losePanel;
+    [SerializeField] private RawImage menuBg;
+    [SerializeField] private RawImage gameBg;
 
     [SerializeField] private TextMeshProUGUI gameTimerText;
     [HideInInspector] public bool gameStart = false;
 
-    float remainingTime;
+    public GameObject menuPanel;
+    public GameObject gamePanel;
+
+    public GameObject losePanel;
+    public GameObject winpanel;
+
+    public float remainingTime;
     int score;
 
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -29,11 +31,16 @@ public class UiManager : MonoBehaviour
     public void OnStart()
     {
         gameStart = true;
+
+        menuPanel.SetActive(false);
+
     }
 
     private void Update()
     {
-        _img.uvRect = new Rect(_img.uvRect.position + new Vector2(_x, _y) * Time.deltaTime, _img.uvRect.size);
+        menuBg.uvRect = new Rect(menuBg.uvRect.position + new Vector2(0.01f, 0.01f) * Time.deltaTime, menuBg.uvRect.size);
+        gameBg.uvRect = new Rect(menuBg.uvRect.position + new Vector2(0.01f, 0.01f) * Time.deltaTime, menuBg.uvRect.size);
+
         if (gameStart)
         {
             if (remainingTime > 0)
@@ -56,7 +63,7 @@ public class UiManager : MonoBehaviour
     private void EndGame()
     {
         gameStart = false;
-        menupanel.SetActive(true);
+        menuPanel.SetActive(true);
     }
 
     public void GiveUp()
